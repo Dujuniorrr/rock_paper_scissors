@@ -12,9 +12,9 @@ public class Judge {
         int portNumber = 6789;
 
         ArrayList<String> nicknamesOfPlayers = new ArrayList<String>();
-        ArrayList<InetAddress> addressOfPlayer = new ArrayList<InetAddress>();
-        ArrayList<Integer> portsOfPlayer = new ArrayList<Integer>();
-        
+        ArrayList<InetAddress> addressOfPlayers = new ArrayList<InetAddress>();
+        ArrayList<Integer> portsOfPlayers = new ArrayList<Integer>();
+
         DatagramSocket aSocket = null;
         DatagramPacket request = null;
 
@@ -24,16 +24,16 @@ public class Judge {
             System.out.println("\nInicializando Juiz do jogo Pedra - Papel - Tesoura\nAguardando cadastro de jogador...");
 
             // Cadastrando jogadores
-            while(addressOfPlayer.size() < 2){
+            while(addressOfPlayers.size() < 2){
                 buffer = new byte[1000];
                 request = new DatagramPacket(buffer, buffer.length); 
                 aSocket.receive(request);
 
                 nicknamesOfPlayers.add(new String(request.getData()).trim());
-                addressOfPlayer.add(request.getAddress());
-                portsOfPlayer.add(request.getPort());
+                addressOfPlayers.add(request.getAddress());
+                portsOfPlayers.add(request.getPort());
 
-                System.out.println("Jogador " + addressOfPlayer.size() +" (" + nicknamesOfPlayers.get( addressOfPlayer.size() -1) + ") cadastrado.");
+                System.out.println("Jogador " + addressOfPlayers.size() +" (" + nicknamesOfPlayers.get( addressOfPlayers.size() -1) + ") cadastrado.");
             }
 
             int player = 0;  // 0 -> 1
@@ -42,7 +42,7 @@ public class Judge {
             // Enviando oponentes
             while(player <= 1){ 
                 byte[] msg = nicknamesOfPlayers.get(opponent).getBytes(); // n2
-                request = new DatagramPacket(msg, msg.length, addressOfPlayer.get(player), portsOfPlayer.get(player));
+                request = new DatagramPacket(msg, msg.length, addressOfPlayers.get(player), portsOfPlayers.get(player));
                 aSocket.send(request);
                 player++;
                 opponent--;
@@ -58,10 +58,10 @@ public class Judge {
                     String choice = new String(request.getData()).trim();
             
                     //Envia as escolhas para os jogadores
-                    for(int j = 0; j < addressOfPlayer.size(); j++){
-                        if(!request.getAddress().equals(addressOfPlayer.get(j)) || request.getPort() != portsOfPlayer.get(j).intValue()){
+                    for(int j = 0; j < addressOfPlayers.size(); j++){
+                        if(!request.getAddress().equals(addressOfPlayers.get(j)) || request.getPort() != portsOfPlayers.get(j).intValue()){
                             byte[] msg = choice.getBytes();
-                            DatagramPacket requestChoiceOpponent = new DatagramPacket(msg, msg.length, addressOfPlayer.get(j), portsOfPlayer.get(j));
+                            DatagramPacket requestChoiceOpponent = new DatagramPacket(msg, msg.length, addressOfPlayers.get(j), portsOfPlayers.get(j));
                             aSocket.send(requestChoiceOpponent);
                         }
                     }
