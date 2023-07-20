@@ -7,14 +7,17 @@ import java.net.InetAddress;
 
 public class Judge {
 
-    static int portNumber = 6789;
-    static ArrayList<String> nicknamesOfPlayers = new ArrayList<String>();
-    static ArrayList<InetAddress> addressOfPlayer = new ArrayList<InetAddress>();
-    static ArrayList<Integer> portsOfPlayer = new ArrayList<Integer>();
-
     public static void main(String[] args) {
+
+        int portNumber = 6789;
+
+        ArrayList<String> nicknamesOfPlayers = new ArrayList<String>();
+        ArrayList<InetAddress> addressOfPlayer = new ArrayList<InetAddress>();
+        ArrayList<Integer> portsOfPlayer = new ArrayList<Integer>();
+        
         DatagramSocket aSocket = null;
         DatagramPacket request = null;
+
         try {
             byte[] buffer = new byte[1000];
             aSocket = new DatagramSocket(portNumber);

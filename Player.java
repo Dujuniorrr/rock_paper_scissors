@@ -6,13 +6,15 @@ import java.util.Scanner;
 import java.net.InetAddress;
 
 public class Player {
-
-    static String nickname;
-    static Scanner scan = new Scanner(System.in);
     
     public static void main(String[] args) {
+
+        String nickname;
+        Scanner scan = new Scanner(System.in);
+
         DatagramSocket aSocket = null;
         DatagramPacket request = null;
+        
         try {
             byte[] buffer = new byte[1000];
             aSocket = new DatagramSocket();
@@ -38,7 +40,7 @@ public class Player {
             int pointsOpponent = 0;
 
             //Inicia a partida
-            while(points < 2 && pointsOpponent <2){
+            while(points < 2 && pointsOpponent < 2){
                 rounds++;
                 int choice = 0;
 
@@ -102,7 +104,7 @@ public class Player {
         } catch (IOException e){
             System.out.println("IO " + e);
         } finally{
-            if(aSocket != null) aSocket.close();
+            if(aSocket != null) aSocket.close(); scan.close();
         }
     }
 
