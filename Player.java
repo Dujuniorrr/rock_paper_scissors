@@ -14,7 +14,7 @@ public class Player {
 
         DatagramSocket aSocket = null;
         DatagramPacket request = null;
-        
+
         try {
             byte[] buffer = new byte[1000];
             aSocket = new DatagramSocket();
@@ -78,7 +78,7 @@ public class Player {
 
                 //verifica quem ganhou a rodada
                 if (choice == choiceOpponent) {
-                    System.out.println("Simbolos Iguais. Empate na rodada!\nNão será atribuido pontos para nenhum dos jogadores.");
+                    System.out.println("\nSimbolos Iguais. Empate na rodada!\nNão será atribuido pontos para nenhum dos jogadores.");
                 } else if (choice == 1 && choiceOpponent == 3
                         || choice == 2 && choiceOpponent == 1
                         || choice == 3 && choiceOpponent == 2) {
