@@ -44,7 +44,7 @@ public class Player {
 
                 //Escolhe uma opção
                 while(choice != 1 && choice != 2 && choice != 3){
-                    System.out.println(
+                    System.out.print(
                     "\nIniciando rodada número [" + rounds +"]\n= Faça sua Escolha =\nPedra (digite 1)\nPapel (digite 2)\nTesoura (digite 3)\nDigite sua escolha: "
                     );
                     choice = scan.nextInt();
@@ -66,9 +66,17 @@ public class Player {
                 System.out.println("\nVocê escolheu " + getChoice(choice));
                 System.out.println("Seu oponente escolheu " + getChoice(choiceOpponent));
 
+                if ((choice == 1 && choiceOpponent == 3) || (choice == 3 && choiceOpponent == 1) ) {
+                    System.out.println("Pedra quebra Tesoura.\n");
+                } else if ((choice == 2 && choiceOpponent == 1) || (choice == 1 && choiceOpponent == 2) ) {
+                    System.out.println("Papel embrulha Pedra.\n");
+                } else if ((choice == 3 && choiceOpponent == 2) || (choice == 2 && choiceOpponent == 3) ) {
+                    System.out.println("Tesoura corta Papel.\n");
+                } 
+
                 //verifica quem ganhou a rodada
                 if (choice == choiceOpponent) {
-                    System.out.println("Simbolos Iguais. Empate na rodada!");
+                    System.out.println("Simbolos Iguais. Empate na rodada!\nNão será atribuido pontos para nenhum dos jogadores.");
                 } else if (choice == 1 && choiceOpponent == 3
                         || choice == 2 && choiceOpponent == 1
                         || choice == 3 && choiceOpponent == 2) {
@@ -87,7 +95,7 @@ public class Player {
                 aSocket.send(request);
             }
 
-            System.out.println("Temos um vencedor!\nFim de jogo.");
+            System.out.println("\nTemos um vencedor!\nFim de jogo.");
 
         } catch (SocketException e) {
             System.out.println("Socket " + e);
