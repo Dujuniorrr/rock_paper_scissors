@@ -1,6 +1,14 @@
 {
   "version": "0.2.0",
   "configurations": [
+  
+    {
+      "type": "java",
+      "name": "Judge",
+      "request": "launch",
+      "mainClass": "Judge",
+      "projectName": " rock_paper_scissors_943dbde2"
+    },
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
